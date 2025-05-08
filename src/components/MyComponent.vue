@@ -1,7 +1,7 @@
 <template lang="">
     <div class="my-component">
-        <h1 v-if="isVisible" >{{message}}</h1>
-        <button v-on:click="sayHello">Aparecer - Desaparecer </button>
+        <h1 v-bind:class="{highlighted:isHighlighted}">{{title}}</h1>
+        <button v-on:click="toggleHighlight">Toggle Highlight</button>
         <input v-model="message">
 
         <ul> 
@@ -9,13 +9,19 @@
         </ul>
     </div>
 </template>
-
+<style scoped>
+    .highlighted{
+        color:gold
+    }
+</style>
 <script>
 export default {
     name: 'MycomponentView',
     data(){
         return{
             message: 'Hello World',
+            title: 'this is the title',
+            isHighlighted: false,
             isVisible: true,
             list: [
                 {id:1,text: 'First Item'},
@@ -29,6 +35,9 @@ export default {
         },
         sayHello(){
             alert('Hello!');
+        },
+        toggleHighlight(){
+            this.isHighlighted = !this.isHighlighted;
         }
     }
 }
